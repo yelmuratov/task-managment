@@ -1,123 +1,112 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
+<head>
+  <!-- Meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('title')</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
-  <!-- Include Select2 CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" />
+  <!-- Custom fonts for this template-->
+  <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template-->
+  <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
   @yield('styles')
-
 </head>
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-<div class="wrapper">
 
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-dark">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/users" class="nav-link">Home</a>
-      </li>
-    </ul>
+<body id="page-top">
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      @if (auth()->check())  
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('logout') }}" class="nav-link">Logout</a>
-        </li>
-      @else
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="/" class="nav-link">Login</a>
-        </li>
-      @endif
-    </ul>
-  </nav>
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="#" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a>
+  <!-- Page Wrapper -->
+  <div id="wrapper">
 
     <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/users">
+        <div class="sidebar-brand-icon">
+          <i class="fas fa-users"></i>
         </div>
+        <div class="sidebar-brand-text mx-3">Task managment system</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Users -->
+      <li class="nav-item">
+        <a class="nav-link" href="/users">
+          <i class="fas fa-fw fa-users"></i>
+          <span>Users</span>
+        </a>
+      </li>
+
+      <!-- Nav Item - Areas -->
+      <li class="nav-item">
+        <a class="nav-link" href="/areas">
+          <i class="fas fa-fw fa-map"></i>
+          <span>Areas</span>
+        </a>
+      </li>
+
+      <!-- Nav Item - Categories -->
+      <li class="nav-item">
+        <a class="nav-link" href="/categories">
+          <i class="fas fa-fw fa-list"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+
+      <!-- Nav Item - Tasks -->
+      <li class="nav-item">
+        <a class="nav-link" href="/tasks">
+          <i class="fas fa-fw fa-tasks"></i>
+          <span>Tasks</span>
+        </a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <!-- Include your topbar here if needed -->
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+          @yield('content')
+        </div>
+        <!-- /.container-fluid -->
+
       </div>
+      <!-- End of Main Content -->
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <a href="/users" class="nav-link">
-            <i class="nav-icon fas fa-chart-pie"></i>
-            <p>Users</p>
-          </a>
-          <a href="/areas" class="nav-link">
-            <i class="nav-icon fas fa-chart-pie"></i>
-            <p>Areas</p>
-          </a>
-          <a href="/categories" class="nav-link">
-            <i class="nav-icon fas fa-chart-pie"></i>
-            <p>Categories</p>
-          </a>
-          <a href="/tasks" class="nav-link">
-            <i class="nav-icon fas fa-chart-pie"></i>
-            <p>Tasks</p>
-          </a>
-        </ul>
-      </nav>
+      <!-- Footer -->
+      <!-- Include your footer here if needed -->
+      <!-- End of Footer -->
+
     </div>
-  </aside>
+    <!-- End of Content Wrapper -->
 
-  @yield('content')
+  </div>
+  <!-- End of Page Wrapper -->
 
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
-    </div>
-  </footer>
-</div>
-<!-- ./wrapper -->
+  <!-- Scripts -->
+  <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap -->
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- overlayScrollbars -->
-<script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('dist/js/adminlte.js') }}"></script>
-
-<!-- Include Select2 JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
-
-@yield('scripts')
+  @yield('scripts')
 
 </body>
+
 </html>

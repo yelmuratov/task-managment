@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TaskArea;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,6 +19,15 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'role' => 'TestRole',
+        ]);
+
+
+        $this->call([
+            CategorySeeder::class,
+            AreaSeeder::class,  
+            TaskSeeder::class,
+            TaskAreaSeeder::class,
         ]);
     }
 }

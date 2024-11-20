@@ -1,4 +1,3 @@
-
 @extends('layouts.adminLayout')
 
 @section('title', 'Area List')

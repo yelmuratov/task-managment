@@ -78,7 +78,25 @@
       <div id="content">
 
         <!-- Topbar -->
-        <!-- Include your topbar here if needed -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Name -->
+          <span class="navbar-text mr-auto">
+            <?php echo e(Auth::user()->name); ?>
+
+          </span>
+
+          <!-- Logout Button -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo e(route('logout')); ?>">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+              </a>
+            </li>
+          </ul>
+
+        </nav>
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->

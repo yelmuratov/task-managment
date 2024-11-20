@@ -17,8 +17,8 @@ use App\Http\Controllers\TaskController;
 Route::get('/',[AuthController::class,'login_page'])->name('login.index');
 Route::post('/login',[AuthController::class,'login'])->name('login');
 
-Route::get('/register',[AuthController::class,'register_page'])->name('register.index');
-Route::post('/store',[AuthController::class,'register'])->name('register');
+Route::get('/registeration',[AuthController::class,'register_page'])->name('register.index');
+Route::post('/register',[AuthController::class,'register'])->name('register');
 
 
 Route::get('/users', [UserController::class, 'index'])->name('user.index');

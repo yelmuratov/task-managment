@@ -16,31 +16,26 @@ class TaskController extends Controller
      * Display a listing of the resource.
      */
 
-     public function index(Request $request)
-     {
-         $query = Task::query();
-     
-         if (auth()->user()->role !== 'admin') {
-             $userAreas = auth()->user()->areas->pluck('id');
-     
-             $query->whereHas('areas', function ($query) use ($userAreas) {
-                 $query->whereIn('areas.id', $userAreas);
-             });
-         }
-     
-         if ($request->has('start_date') && $request->has('end_date')) {
-             $query->whereBetween('created_at', [$request->start_date, $request->end_date]);
-         }
-     
-         $tasks = $query->paginate(10);
-     
-         return view('task.task', compact('tasks'));
-     }
-     
-     
-     
-        
-    
+    public function index(Request $request)
+    {
+        $query = Task::query();
+
+        if (auth()->user()->role !== 'admin') {
+            $userAreas = auth()->user()->areas->pluck('id');
+
+            $query->whereHas('areas', function ($query) use ($userAreas) {
+                $query->whereIn('areas.id', $userAreas);
+            });
+        }
+
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $query->whereBetween('period', [$request->start_date, $request->end_date]);
+        }
+
+        $tasks = $query->paginate(10);
+
+        return view('task.task', compact('tasks'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -114,8 +109,6 @@ class TaskController extends Controller
     
         return redirect()->route('tasks.index')->with('success', 'Task updated successfully!');
     }
-    
-    
 
     /**
      * Remove the specified resource from storage.

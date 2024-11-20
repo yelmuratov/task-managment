@@ -24,7 +24,7 @@
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/users">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
         <div class="sidebar-brand-icon">
           <i class="fas fa-users"></i>
         </div>
@@ -46,7 +46,7 @@
       <li class="nav-item">
         <a class="nav-link" href="/areas">
           <i class="fas fa-fw fa-map"></i>
-          <span>Areas</span>
+          <span>Regions</span>
         </a>
       </li>
 
@@ -97,7 +97,7 @@
 
         </nav>
         <!-- End of Topbar -->
-
+        
         <!-- Begin Page Content -->
         <div class="container-fluid">
           @yield('content')

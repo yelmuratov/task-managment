@@ -39,6 +39,7 @@
                         <input type="date" id="end_date" name="end_date" class="form-control" value="{{ request('end_date') }}">
                     </div>
                     <button type="submit" class="btn btn-primary">Filter</button>
+                    <a href="/tasks" class="btn btn-secondary ml-2">Clear</a>
                 </form>
             </div>
             {{-- @php
@@ -50,7 +51,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Title</th>
-                        <th>Area</th>
+                        <th>Region</th>
                         <th>Performer</th>
                         <th>Category</th>
                         <th>File</th>

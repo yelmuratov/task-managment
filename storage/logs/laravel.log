@@ -1763,3 +1763,7 @@
 #45 C:\\Users\\acer\\Desktop\\task-manager\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\acer\\\\D...')
 #46 {main}
 "} 
+[2024-11-20 10:08:04] local.ERROR: The "yield" expression can only be used inside a function {"userId":1,"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): The \"yield\" expression can only be used inside a function at C:\\Users\\acer\\Desktop\\task-managment\\storage\\framework\\views\\d0059935190be3bbbd8f3a59f0d9d9a6.php:104)
+[stacktrace]
+#0 {main}
+"} 

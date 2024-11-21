@@ -18,3 +18,17 @@ export default {
     },
     plugins: [],
 };
+
+module.exports = {
+    darkMode: 'class', // Enables class-based dark mode
+    content: [
+      './resources/**/*.blade.php', // Adjust as needed
+      './resources/**/*.js',
+      './resources/**/*.vue',
+    ],
+    theme: {
+      extend: {},
+    },
+    plugins: [],
+  };
+  

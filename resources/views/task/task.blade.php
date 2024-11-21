@@ -32,11 +32,11 @@
                 <form method="GET" action="{{ route('tasks.index') }}" class="form-inline">
                     <div class="form-group mr-2">
                         <label for="start_date" class="mr-2">Start Date:</label>
-                        <input type="date" id="start_date" name="start_date" class="form-control" value="{{ request('start_date') }}">
+                        <input type="date" id="start_date" name="start_date" class="form-control text-gray-900" value="{{ request('start_date') }}">
                     </div>
                     <div class="form-group mr-2">
                         <label for="end_date" class="mr-2">End Date:</label>
-                        <input type="date" id="end_date" name="end_date" class="form-control" value="{{ request('end_date') }}">
+                        <input type="date" id="end_date" name="end_date" class="form-control text-gray-900" value="{{ request('end_date') }}">
                     </div>
                     <button type="submit" class="btn btn-primary">Filter</button>
                     <a href="/tasks" class="btn btn-secondary ml-2">Clear</a>

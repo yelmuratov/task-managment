@@ -39,18 +39,24 @@
     .dark .dark\:text-gray-900 {
       color: #1a202c;
     }
+    .light .light\:text-gray-900 {
+      color: #1a202c;
+    }
+    .light .light\:bg-gray-100 {
+      background-color: #f7fafc;
+    }
   </style>
 
   @yield('styles')
 </head>
 
-<body id="page-top" class="h-full text-gray-900 dark:text-gray-100 dark:bg-gray-900">
+<body id="page-top" class="h-full text-gray-900 dark:text-gray-100 dark:bg-gray-900 light:text-gray-900">
 
   <!-- Page Wrapper -->
-  <div id="wrapper" class="dark:bg-gray-900 dark:text-gray-100">
+  <div id="wrapper" class="dark:bg-gray-900 h-full dark:text-gray-100 light:bg-gray-100 light:text-gray-900">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion dark:bg-gray-800 dark:text-gray-100" id="accordionSidebar">
+    <ul class="navbar-nav sidebar sidebar-dark accordion dark:bg-gray-800 light:bg-gray-100" id="accordionSidebar">
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center dark:bg-gray-800 dark:text-gray-100" href="/">
         <div class="sidebar-brand-icon">
@@ -64,7 +70,7 @@
 
       <!-- Nav Item - Users -->
       <li class="nav-item">
-        <a class="nav-link dark:text-gray-100" href="/users">
+        <a class="nav-link" href="/users">
           <i class="fas fa-fw fa-users"></i>
           <span>Users</span>
         </a>
@@ -72,7 +78,7 @@
 
       <!-- Nav Item - Areas -->
       <li class="nav-item">
-        <a class="nav-link dark:text-gray-100" href="/areas">
+        <a class="nav-link" href="/areas">
           <i class="fas fa-fw fa-map"></i>
           <span>Regions</span>
         </a>
@@ -80,7 +86,7 @@
 
       <!-- Nav Item - Categories -->
       <li class="nav-item">
-        <a class="nav-link dark:text-gray-100" href="/categories">
+        <a class="nav-link" href="/categories">
           <i class="fas fa-fw fa-list"></i>
           <span>Categories</span>
         </a>
@@ -88,7 +94,7 @@
 
       <!-- Nav Item - Tasks -->
       <li class="nav-item">
-        <a class="nav-link dark:text-gray-100" href="/tasks">
+        <a class="nav-link" href="/tasks">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Tasks</span>
         </a>
@@ -106,22 +112,22 @@
       <div id="content" class="dark:bg-gray-900 dark:text-gray-100">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow dark:bg-gray-800 dark:text-gray-100">
+        <nav class="navbar navbar-expand navbar-light topbar pb-4 static-top shadow dark:bg-gray-800 dark:text-gray-100 light:text-gray-900">
 
           <!-- Name -->
-          <span class="navbar-text mr-auto dark:text-gray-100">
+          <span class="navbar-text mr-auto dark:text-gray-100 light:text-gray-900">
             {{ Auth::user()->name }}
           </span>
 
           <!-- Dark Mode Toggle -->
-          <button id="theme-toggle" class="text-gray-500 dark:text-gray-400 focus:outline-none">
+          <button id="theme-toggle" class="text-gray-500 dark:text-gray-400 light:text-gray-900 focus:outline-none">
             <i id="theme-toggle-icon" class="fas fa-moon"></i>
           </button>
 
           <!-- Logout Button -->
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link dark:text-gray-100" href="{{ route('logout') }}">
+              <a class="nav-link" href="{{ route('logout') }}">
                 <i class="fas fa-sign-out-alt"></i>
                 Logout
               </a>
@@ -131,7 +137,7 @@
         </nav>
         <!-- End of Topbar -->
 
-        <div class="container-fluid main">
+        <div class="container-fluid main pt-8 h-full">
           <!-- Statistics Cards -->
           <div class="row">
             <div class="col-xl-3 col-md-6 mb-4">
@@ -225,6 +231,7 @@
     const sidebar = document.getElementById('accordionSidebar');
     const header = document.querySelector('.topbar');
     const navbar = document.querySelector('.navbar');
+    const navbarBrand = document.querySelector('.navbar-brand');
 
     // Load theme from localStorage
     const currentTheme = localStorage.getItem('theme');
@@ -237,15 +244,31 @@
       navbar.classList.add('dark:bg-gray-800');
       themeToggleIcon.classList.remove('fa-moon');
       themeToggleIcon.classList.add('fa-sun');
+      document.querySelector('.navbar-text').classList.add('text-gray-100');
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.add('text-gray-100'));
+      document.querySelectorAll('.nav-link i').forEach(icon => icon.classList.add('text-gray-100'));
+      document.querySelector('.sidebar-brand-text').classList.add('text-gray-100');
+      document.querySelector('.sidebar-brand-icon i').classList.add('text-gray-100');
+      document.querySelectorAll('hr').forEach(hr => hr.classList.add('dark:border-gray-700'));
+      document.querySelectorAll('input, select').forEach(input => input.classList.add('dark:bg-gray-700', 'dark:text-gray-100'));
+      document.querySelectorAll('.pagination .page-link').forEach(button => button.classList.add('dark:bg-gray-700', 'dark:text-gray-100'));
     } else {
-      document.documentElement.classList.remove('dark');
-      document.body.classList.remove('dark');
-      mainContainer.classList.remove('dark:bg-gray-800');
-      sidebar.classList.remove('dark:bg-gray-800');
-      header.classList.remove('dark:bg-gray-800');
-      navbar.classList.remove('dark:bg-gray-800');
+      document.documentElement.classList.add('light');
+      document.body.classList.add('light');
+      mainContainer.classList.add('light:bg-gray-100');
+      sidebar.classList.add('light:bg-gray-100');
+      header.classList.add('light:bg-gray-100');
+      navbar.classList.add('light:bg-gray-100');
       themeToggleIcon.classList.remove('fa-sun');
       themeToggleIcon.classList.add('fa-moon');
+      document.querySelector('.navbar-text').classList.add('text-gray-900');
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.add('text-gray-900'));
+      document.querySelectorAll('.nav-link i').forEach(icon => icon.classList.add('text-gray-900'));
+      document.querySelector('.sidebar-brand-text').classList.add('text-gray-900');
+      document.querySelector('.sidebar-brand-icon i').classList.add('text-gray-900');
+      document.querySelectorAll('hr').forEach(hr => hr.classList.add('light:border-gray-300'));
+      document.querySelectorAll('input, select').forEach(input => input.classList.add('light:bg-gray-200', 'light:text-gray-900'));
+      document.querySelectorAll('.pagination .page-link').forEach(button => button.classList.add('light:bg-gray-200', 'light:text-gray-900'));
     }
 
     // Toggle theme
@@ -259,6 +282,28 @@
         navbar.classList.remove('dark:bg-gray-800');
         themeToggleIcon.classList.remove('fa-sun');
         themeToggleIcon.classList.add('fa-moon');
+        document.documentElement.classList.add('light');
+        document.body.classList.add('light');
+        mainContainer.classList.add('light:bg-gray-100');
+        sidebar.classList.add('light:bg-gray-100');
+        header.classList.add('light:bg-gray-100');
+        navbar.classList.add('light:bg-gray-100');
+        document.querySelector('.navbar-text').classList.remove('text-gray-100');
+        document.querySelector('.navbar-text').classList.add('text-gray-900');
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('text-gray-100'));
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.add('text-gray-900'));
+        document.querySelectorAll('.nav-link i').forEach(icon => icon.classList.remove('text-gray-100'));
+        document.querySelectorAll('.nav-link i').forEach(icon => icon.classList.add('text-gray-900'));
+        document.querySelector('.sidebar-brand-text').classList.remove('text-gray-100');
+        document.querySelector('.sidebar-brand-text').classList.add('text-gray-900');
+        document.querySelector('.sidebar-brand-icon i').classList.remove('text-gray-100');
+        document.querySelector('.sidebar-brand-icon i').classList.add('text-gray-900');
+        document.querySelectorAll('hr').forEach(hr => hr.classList.remove('dark:border-gray-700'));
+        document.querySelectorAll('hr').forEach(hr => hr.classList.add('light:border-gray-300'));
+        document.querySelectorAll('input, select').forEach(input => input.classList.remove('dark:bg-gray-700', 'dark:text-gray-100'));
+        document.querySelectorAll('input, select').forEach(input => input.classList.add('light:bg-gray-200', 'light:text-gray-900'));
+        document.querySelectorAll('.pagination .page-link').forEach(button => button.classList.remove('dark:bg-gray-700', 'dark:text-gray-100'));
+        document.querySelectorAll('.pagination .page-link').forEach(button => button.classList.add('light:bg-gray-200', 'light:text-gray-900'));
         localStorage.setItem('theme', 'light');
       } else {
         document.documentElement.classList.add('dark');
@@ -269,6 +314,28 @@
         navbar.classList.add('dark:bg-gray-800');
         themeToggleIcon.classList.remove('fa-moon');
         themeToggleIcon.classList.add('fa-sun');
+        document.documentElement.classList.remove('light');
+        document.body.classList.remove('light');
+        mainContainer.classList.remove('light:bg-gray-100');
+        sidebar.classList.remove('light:bg-gray-100');
+        header.classList.remove('light:bg-gray-100');
+        navbar.classList.remove('light:bg-gray-100');
+        document.querySelector('.navbar-text').classList.remove('text-gray-900');
+        document.querySelector('.navbar-text').classList.add('text-gray-100');
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('text-gray-900'));
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.add('text-gray-100'));
+        document.querySelectorAll('.nav-link i').forEach(icon => icon.classList.remove('text-gray-900'));
+        document.querySelectorAll('.nav-link i').forEach(icon => icon.classList.add('text-gray-100'));
+        document.querySelector('.sidebar-brand-text').classList.remove('text-gray-900');
+        document.querySelector('.sidebar-brand-text').classList.add('text-gray-100');
+        document.querySelector('.sidebar-brand-icon i').classList.remove('text-gray-900');
+        document.querySelector('.sidebar-brand-icon i').classList.add('text-gray-100');
+        document.querySelectorAll('hr').forEach(hr => hr.classList.remove('light:border-gray-300'));
+        document.querySelectorAll('hr').forEach(hr => hr.classList.add('dark:border-gray-700'));
+        document.querySelectorAll('input, select').forEach(input => input.classList.remove('light:bg-gray-200', 'light:text-gray-900'));
+        document.querySelectorAll('input, select').forEach(input => input.classList.add('dark:bg-gray-700', 'dark:text-gray-100'));
+        document.querySelectorAll('.pagination .page-link').forEach(button => button.classList.remove('light:bg-gray-200', 'light:text-gray-900'));
+        document.querySelectorAll('.pagination .page-link').forEach(button => button.classList.add('dark:bg-gray-700', 'dark:text-gray-100'));
         localStorage.setItem('theme', 'dark');
       }
     });

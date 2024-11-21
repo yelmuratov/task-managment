@@ -12,7 +12,7 @@ use App\Http\Controllers\TaskController;
 // Auth routes
 Route::get('/',[AuthController::class,'login_page'])->name('login.index');
 Route::post('/login',[AuthController::class,'login'])->name('login');
-Route::get('/registeration',[AuthController::class,'register_page'])->name('register.index');
+Route::get('/registration',[AuthController::class,'register_page'])->name('register.index');
 Route::post('/register',[AuthController::class,'register'])->name('register');
 
 // User routes

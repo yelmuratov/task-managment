@@ -18,21 +18,12 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
-        $query = Task::query();
-
-        if (auth()->user()->role !== 'admin') {
-            $userAreas = auth()->user()->areas->pluck('id');
-
-            $query->whereHas('areas', function ($query) use ($userAreas) {
-                $query->whereIn('areas.id', $userAreas);
-            });
-        }
-
+        // if (request()->has('start_date') && request()->has('end_date')) it should filter tasks by period range else it should return all tasks with pagination 10 per page
         if ($request->has('start_date') && $request->has('end_date')) {
-            $query->whereBetween('period', [$request->start_date, $request->end_date]);
+            $tasks = Task::whereBetween('period', [$request->start_date, $request->end_date])->orderBy('period', 'desc')->paginate(10);
+        } else {
+            $tasks = Task::orderBy('period', 'desc')->paginate(10);
         }
-
-        $tasks = $query->paginate(10);
 
         return view('task.task', compact('tasks'));
     }

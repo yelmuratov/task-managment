@@ -22,7 +22,6 @@ class TaskFactory extends Factory
             'title' => fake()->sentence(),
             'file' => 'https://www.techsmith.com/blog/wp-content/uploads/2022/03/resize-image.png',
             'period' => fake()->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
-
         ];
     }
 }

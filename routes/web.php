@@ -38,3 +38,4 @@ Route::delete('/area/delete/{id}', [AreaController::class, 'destroy']);
 // Task routes
 Route::resource('tasks', TaskController::class);
 Route::resource('taskAreas', TaskAreaController::class);
+Route::post('/task/store', [TaskController::class, 'store'])->name('task.store');

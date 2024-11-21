@@ -18,6 +18,11 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
+        $totalTasks = Task::count();
+        $tasksFor2days = Task::whereBetween('period', [now(), now()->addDays(2)])->count();
+        $tasksPassedDeadline = Task::where('period', '<', now())->count();
+        $tasksFor1day = Task::whereBetween('period', [now(), now()->addDays(1)])->count();
+
         // if (request()->has('start_date') && request()->has('end_date')) it should filter tasks by period range else it should return all tasks with pagination 10 per page
         if ($request->has('start_date') && $request->has('end_date')) {
             $tasks = Task::whereBetween('period', [$request->start_date, $request->end_date])->orderBy('period', 'desc')->paginate(10);
@@ -25,7 +30,7 @@ class TaskController extends Controller
             $tasks = Task::orderBy('period', 'desc')->paginate(10);
         }
 
-        return view('task.task', compact('tasks'));
+        return view('task.task', compact('tasks', 'totalTasks', 'tasksFor2days', 'tasksPassedDeadline', 'tasksFor1day'));
     }
 
     /**
@@ -33,9 +38,14 @@ class TaskController extends Controller
      */
     public function create()
     {
+        $totalTasks = Task::count();
+        $tasksFor2days = Task::whereBetween('period', [now(), now()->addDays(2)])->count();
+        $tasksPassedDeadline = Task::where('period', '<', now())->count();
+        $tasksFor1day = Task::whereBetween('period', [now(), now()->addDays(1)])->count();
+
         $areas = Area::all();
         $categories = Category::all();
-        return view('task.task_create', compact('categories','areas'));
+        return view('task.task_create', compact('categories', 'areas', 'totalTasks', 'tasksFor2days', 'tasksPassedDeadline', 'tasksFor1day'));
     }
 
     /**

@@ -6,12 +6,24 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Task;
 
 class UserController extends Controller
 {
     public function index(){
+        $totalTasks = Task::count();
+        $tasksFor2days = Task::whereBetween('period', [now(), now()->addDays(2)])->count();
+        $tasksPassedDeadline = Task::where('period', '<', now())->count();
+        $tasksFor1day = Task::whereBetween('period', [now(), now()->addDays(1)])->count();
+
         $users = User::paginate(10);
-        return view('user.user',['users'=>$users]);
+        return view('user.user', [
+            'users' => $users,
+            'totalTasks' => $totalTasks,
+            'tasksFor2days' => $tasksFor2days,
+            'tasksPassedDeadline' => $tasksPassedDeadline,
+            'tasksFor1day' => $tasksFor1day
+        ]);
     }
 
     public function store(Request $request)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\Task;
 
 class CategoryController extends Controller
 {
@@ -13,8 +14,19 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $totalTasks = Task::count();
+        $tasksFor2days = Task::whereBetween('period', [now(), now()->addDays(2)])->count();
+        $tasksPassedDeadline = Task::where('period', '<', now())->count();
+        $tasksFor1day = Task::whereBetween('period', [now(), now()->addDays(1)])->count();
+
         $categories = Category::paginate(10);
-        return view('category.categories',['categories'=>$categories]);
+        return view('category.categories', [
+            'categories' => $categories,
+            'totalTasks' => $totalTasks,
+            'tasksFor2days' => $tasksFor2days,
+            'tasksPassedDeadline' => $tasksPassedDeadline,
+            'tasksFor1day' => $tasksFor1day
+        ]);
     }
 
     /**

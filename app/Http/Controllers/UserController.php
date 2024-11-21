@@ -15,6 +15,7 @@ class UserController extends Controller
         $tasksFor2days = Task::whereBetween('period', [now(), now()->addDays(2)])->count();
         $tasksPassedDeadline = Task::where('period', '<', now())->count();
         $tasksFor1day = Task::whereBetween('period', [now(), now()->addDays(1)])->count();
+        $finished = Task::where('status', 'done')->count();
 
         $users = User::paginate(10);
         return view('user.user', [
@@ -22,7 +23,8 @@ class UserController extends Controller
             'totalTasks' => $totalTasks,
             'tasksFor2days' => $tasksFor2days,
             'tasksPassedDeadline' => $tasksPassedDeadline,
-            'tasksFor1day' => $tasksFor1day
+            'tasksFor1day' => $tasksFor1day,
+            'finished' => $finished
         ]);
     }
 

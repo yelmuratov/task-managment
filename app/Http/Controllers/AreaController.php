@@ -14,10 +14,11 @@ class AreaController extends Controller
         $tasksFor2days = Task::whereBetween('period', [now(), now()->addDays(2)])->count();
         $tasksPassedDeadline = Task::where('period', '<', now())->count();
         $tasksFor1day = Task::whereBetween('period', [now(), now()->addDays(1)])->count();
+        $finished = Task::where('status', 'done')->count();
 
         $users = User::all();
         $areas = Area::paginate(10);
-        return view('area.areas', compact('areas', 'users', 'totalTasks', 'tasksFor2days', 'tasksPassedDeadline', 'tasksFor1day'));
+        return view('area.areas', compact('areas', 'users', 'totalTasks', 'tasksFor2days', 'tasksPassedDeadline', 'tasksFor1day', 'finished'));
     }
 
     public function store(Request $request)

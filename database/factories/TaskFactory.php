@@ -21,7 +21,10 @@ class TaskFactory extends Factory
             'performer' => fake()->name(),
             'title' => fake()->sentence(),
             'file' => 'https://www.techsmith.com/blog/wp-content/uploads/2022/03/resize-image.png',
-            'period' => fake()->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
+            'period' => fake()->randomElement([now(), now()->addDays(1), now()->addDays(2), now()->subMonths(1), now()->subMonths(2)]),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'status' => fake()->randomElement(['done', 'in_progress', 'failed']),
         ];
     }
 }

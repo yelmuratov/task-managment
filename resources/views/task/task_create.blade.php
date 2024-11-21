@@ -113,7 +113,6 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-
                 <button type="submit" class="btn btn-primary">Save</button>
                 <a href="{{ route('tasks.index') }}" class="btn btn-secondary">Cancel</a>
             </form>

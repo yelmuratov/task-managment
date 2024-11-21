@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\TaskAreaController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\MonitorningController;
 
 
 // Auth routes
@@ -42,4 +43,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('tasks', TaskController::class);
     Route::resource('taskAreas', TaskAreaController::class);
     Route::post('/task/store', [TaskController::class, 'store'])->name('task.store');
+
+    //Monitoring
+    Route::get('/monitoring', [MonitorningController::class, 'monitoring'])->name('monitoring');
+});
+
+Route::fallback(function () {
+    return abort(404, 'Oops! You look like you are lost');
 });

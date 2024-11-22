@@ -16,7 +16,7 @@ class Auth
     public function handle(Request $request, Closure $next): Response
     {
         if (auth()->user()===null) {
-            return response('<h1>Your are unauthorized user bro :(</h1>', 401);
+            return response('<h1>Your are unauthorized user :(</h1>', 401);
         }
 
         return $next($request);

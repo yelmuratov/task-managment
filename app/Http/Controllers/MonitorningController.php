@@ -21,7 +21,12 @@ class MonitorningController extends Controller
         $categories = Category::all();
         $finished = Task::where('status', 'done')->count();
 
-        $regionNames = Area::all()->pluck('name');
+        // array for statistics
+        // form of array: ['region_name' => 'number_of_finished_tasks'];
+        $regionNames = [];
+        foreach ($regions as $region) {
+            $regionNames[$region->name] = TaskArea::where('area_id', $region->id)->where('status', 'done')->count();
+        }
         
         return view('monitoring.monitoring', compact('totalTasks', 'tasksFor2days', 'tasksPassedDeadline', 'tasksFor1day', 'regions', 'categories', 'finished', 'regionNames'));
     }

@@ -13,40 +13,27 @@
   
   <script>
     const ctx = document.getElementById('myChart');
-  
+    
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: {!! json_encode(['Andijon', 'Buxoro', 'Fargʻona', 'Jizzax', 'Xorazm', 'Namangan', 'Navoiy', 'Qashqadaryo', 'Qoraqalpogʻiston', 'Samarqand', 'Sirdaryo', 'Surxondaryo', 'Toshkent']) !!},
-        datasets: [{
-          label: 'Tasks Completed',
-          data: [10, 15, 8, 12, 5, 7],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
-        }]
+      labels: {!! json_encode(array_keys($regionNames)) !!},
+      datasets: [{
+        label: 'Tasks Completed',
+        data: {!! json_encode(array_values($regionNames)) !!},
+        borderWidth: 1
+      }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+      scales: {
+        y: {
+        beginAtZero: true,
+        ticks: {
+          stepSize: 1
+        }
         }
       }
+      }
     });
-  </script>
+    </script>
 @endsection

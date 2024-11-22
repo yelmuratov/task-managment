@@ -15,34 +15,37 @@ class AreaFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected static $regionsOfUzbekistan = [
+        'Andijan',
+        'Bukhara',
+        'Fergana',
+        'Jizzakh',
+        'Namangan',
+        'Navoiy',
+        'Qashqadaryo',
+        'Samarqand',
+        'Sirdaryo',
+        'Surxondaryo',
+        'Tashkent',
+        'Xorazm',
+        'Tashkent city',
+        'Karakalpakstan'
+    ];
 
+    protected static $shuffledRegions = [];
 
     public function definition()
     {
-        // uzbekistan regions
-        $regionsOfUzbekistan = [
-            'Andijan',
-            'Bukhara',
-            'Fergana',
-            'Jizzakh',
-            'Namangan',
-            'Navoiy',
-            'Qashqadaryo',
-            'Samarqand',
-            'Sirdaryo',
-            'Surxondaryo',
-            'Tashkent',
-            'Xorazm',
-            'Tashkent city',
-            'Karakalpakstan'
-        ];
-
-       
-        for($i = 0; $i < count($regionsOfUzbekistan); $i++){
-            Area::create([
-                'name' => $regionsOfUzbekistan[$i],
-                'user_id' => 1
-            ]);
+        if (empty(self::$shuffledRegions)) {
+            self::$shuffledRegions = self::$regionsOfUzbekistan;
+            shuffle(self::$shuffledRegions);
         }
+
+        $region = array_pop(self::$shuffledRegions);
+
+        return [
+            'name' => $region,
+            'user_id' => 1
+        ];
     }
 }

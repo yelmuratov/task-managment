@@ -2,17 +2,40 @@
 
 namespace Database\Seeders;
 
-use App\Models\Area;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Area;
 
 class AreaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        Area::factory(10)->create();
+        $regionsOfUzbekistan = [
+            'Andijan',
+            'Bukhara',
+            'Fergana',
+            'Jizzakh',
+            'Namangan',
+            'Navoiy',
+            'Qashqadaryo',
+            'Samarqand',
+            'Sirdaryo',
+            'Surxondaryo',
+            'Tashkent',
+            'Xorazm',
+            'Tashkent city',
+            'Karakalpakstan'
+        ];
+
+        foreach ($regionsOfUzbekistan as $region) {
+            Area::factory()->create([
+                'name' => $region,
+                'user_id' => 1
+            ]);
+        }
     }
 }

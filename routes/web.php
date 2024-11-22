@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('tasks', TaskController::class);
     Route::resource('taskAreas', TaskAreaController::class);
     Route::post('/task/store', [TaskController::class, 'store'])->name('task.store');
+    Route::get('/tasks/showByRegionAndCategory/{region}/{category}', [TaskController::class, 'showByRegionAndCategory'])->name('tasks.showByRegionAndCategory');
 
     //Monitoring
     Route::get('/monitoring', [MonitorningController::class, 'monitoring'])->name('monitoring');

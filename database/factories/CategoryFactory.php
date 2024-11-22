@@ -14,10 +14,24 @@ class CategoryFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    private $categories = [
+        'Web Development',
+        'Mobile Development',
+        'Desktop Development',
+        'Game Development',
+        'Machine Learning',
+        'Data Science',
+        'DevOps',
+        'Testing',
+        'Design',
+        'Management',
+    ];
+
     public function definition(): array
     {
         return [
-            'name' => fake()->word(),
+            'name' => fake()->randomElement($this->categories),
         ];
     }
 }

@@ -125,4 +125,20 @@ class TaskController extends Controller
     
         return redirect()->route('tasks.index')->with('success', 'Task deleted successfully!');
     }
+
+    public function showByRegionAndCategory($regionId, $categoryId)
+    {
+        $tasks = Task::whereHas('taskAreas', function ($query) use ($regionId) {
+            $query->where('area_id', $regionId);
+        })->where('category_id', $categoryId)->get();
+
+        $region = Area::find($regionId);
+        $totalTasks = Task::count();
+        $tasksFor2days = Task::whereBetween('period', [now(), now()->addDays(2)])->count();
+        $tasksPassedDeadline = Task::where('period', '<', now())->count();
+        $tasksFor1day = Task::whereBetween('period', [now(), now()->addDays(1)])->count();
+        $finished = Task::where('status', 'done')->count();
+
+        return view('task.task_show', compact('tasks', 'region', 'totalTasks', 'tasksFor2days', 'tasksPassedDeadline', 'tasksFor1day', 'finished'));
+    }
 }

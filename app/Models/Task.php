@@ -28,13 +28,13 @@ class Task extends Model
         return $this->hasMany(TaskArea::class);
     }
 
-    public function areas()
+    public function area()
     {
-        return $this->belongsToMany(Area::class, 'task_areas', 'task_id', 'area_id');
+        return $this->belongsTo(Area::class);
     }
 
-//     public function taskAreas()
-// {
-//     return $this->hasMany(TaskArea::class);
-// }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

@@ -11,4 +11,10 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
+
 }

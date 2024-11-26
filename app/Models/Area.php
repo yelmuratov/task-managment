@@ -16,10 +16,20 @@ class Area extends Model
     ];
 
 
-    public function users(){
-        return $this->belongsTo(User::class,'user_id');
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 
     public function taskArea(){
         return $this->hasMany(TaskArea::class);
